@@ -14,7 +14,7 @@ FSJS project 2 - List Filter and Pagination
 const studentItem = document.querySelectorAll(".student-item");
 /*** will show maximum 10 students per page ***/
 const maxStudents = 10;
-const maxPages = 15;
+//const maxPages = 15;
 /** will show max number of pages need **/
 const pageNumber = Math.ceil(studentItem.length / maxStudents);
 
@@ -45,8 +45,8 @@ showPage(studentItem, 1)
 ***/
 
 const appendPageLinks = () => {
-  console.log(maxPages);
-  console.log(pageNumber);
+//  console.log(maxPages);
+//  console.log(pageNumber);
   /** will ceate div w/ pagination class **/
   let div = document.createElement("div");
     div.className = "pagination";
@@ -61,14 +61,15 @@ const appendPageLinks = () => {
       //anchor
       let a = document.createElement("a");
   /** will add eventlistener on bt click **/
-    a.addEventListener("click",(e)=> {
+      a.addEventListener("click",(e)=> {
     //getAllanchor
       const getAllanchor = e.target.parentNode.parentNode.querySelectorAll("a");
-         for (let j=0; j < getAllanchor.length; j++) {
+        for (let j=0; j < getAllanchor.length; j++) {
             getAllanchor[j].classList.remove("active");
-           }
+            }
            e.target.classList.add("active");
-           showPage(studentItem, i+1);
+          //fixed line 71 showing incorrect page number
+           showPage(studentItem, i);
         });/** will add number buttons **/
         a.href = "#";
         a.textContent = i;
