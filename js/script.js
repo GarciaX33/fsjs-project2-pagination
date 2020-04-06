@@ -9,32 +9,33 @@ FSJS project 2 - List Filter and Pagination
 /*** 
    Add your global variables that store the DOM elements you will 
    need to reference and/or manipulate. 
-   
-   But be mindful of which variables should be global and which 
-   should be locally scoped to one of the two main functions you're 
-   going to create. A good general rule of thumb is if the variable 
-   will only be used inside of a function, then it can be locally 
-   scoped to that function.
 ***/
-
+/*** will select the student item class with queryselectorAll ***/
+const studentItem = document.querySelectorAll(".student-item");
+/*** will show maximum 10 students per page ***/
+const maxStudents = 10;
+const maxPages = 15;
+/** will show max number of pages need **/
+const pageNumber = Math.ceil(studentItem.length / maxStudents);
 
 
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
    list except for the ten you want to show.
-
-   Pro Tips: 
-     - Keep in mind that with a list of 54 students, the last page 
-       will only display four.
-     - Remember that the first student has an index of 0.
-     - Remember that a function `parameter` goes in the parens when 
-       you initially define the function, and it acts as a variable 
-       or a placeholder to represent the actual function `argument` 
-       that will be passed into the parens later when you call or 
-       "invoke" the function 
 ***/
-
+//show page function
+showPage = (list, page) => {
+  for (let i = 0; i < studentItem.length; i++ ) {
+    if( i >= (page - 1) * maxStudents && i < (page * maxStudents)) {
+      list[i].style.display = "";
+    } else {
+      list[i].style.display = "none";
+    }
+  }
+}
+//show page function with student item class
+showPage(studentItem, 1)
 
 
 
@@ -43,8 +44,43 @@ FSJS project 2 - List Filter and Pagination
    functionality to the pagination buttons.
 ***/
 
+const appendPageLinks = () => {
+  console.log(maxPages);
+  console.log(pageNumber);
+  /** will ceate div w/ pagination class **/
+  let div = document.createElement("div");
+    div.className = "pagination";
+    document.querySelector(".page").appendChild(div);
+  /** will append to ul **/
+  let ul = document.createElement("ul");
+    div.appendChild(ul);
+  for (let i = 1; i < pageNumber; i++) {
+
+      let li = document.createElement("li");
+      let a = document.createElement("a");
+  /** will add eventlistener on bt click **/
+    a.addEventListener("click",(e)=> {
+      const getAllanchor = e.target.parentNode.parentNode.querySelectorAll("a");
+         for (let j=0; j < getAllanchor.length; j++) {
+            getAllanchor[j].classList.remove("active");
+           }
+           e.target.classList.add("active");
+           showPage(studentItem, i+1);
+        });/** will add number buttons **/
+        a.href = "#";
+        a.textContent = i;
+
+        li.appendChild(a);
+        ul.appendChild(li);
+
+        if(i == 0) {
+           a.classList.add("active");
+        }
+     }
+
+
+}
 
 
 
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
+appendPageLinks(); /** calling function, creates the page links **/
