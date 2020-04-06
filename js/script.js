@@ -54,12 +54,15 @@ const appendPageLinks = () => {
   /** will append to ul **/
   let ul = document.createElement("ul");
     div.appendChild(ul);
+    //will start at page 1 
   for (let i = 1; i < pageNumber; i++) {
-
+      //list
       let li = document.createElement("li");
+      //anchor
       let a = document.createElement("a");
   /** will add eventlistener on bt click **/
     a.addEventListener("click",(e)=> {
+    //getAllanchor
       const getAllanchor = e.target.parentNode.parentNode.querySelectorAll("a");
          for (let j=0; j < getAllanchor.length; j++) {
             getAllanchor[j].classList.remove("active");
