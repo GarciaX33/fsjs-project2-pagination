@@ -55,7 +55,8 @@ const appendPageLinks = () => {
   let ul = document.createElement("ul");
     div.appendChild(ul);
     //will start at page 1 
-  for (let i = 1; i < pageNumber; i++) {
+    //will change to i=0 instead 1 with commit to fix bug
+  for (let i = 0; i < pageNumber; i++) {
       //list
       let li = document.createElement("li");
       //anchor
@@ -69,10 +70,11 @@ const appendPageLinks = () => {
             }
            e.target.classList.add("active");
           //fixed line 71 showing incorrect page number
-           showPage(studentItem, i);
+           showPage(studentItem, i+1);
         });/** will add number buttons **/
         a.href = "#";
-        a.textContent = i;
+      // will fix bug after commit
+        a.textContent = i + 1;
 
         li.appendChild(a);
         ul.appendChild(li);
