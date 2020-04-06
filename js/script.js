@@ -84,6 +84,8 @@ const appendPageLinks = () => {
 
 }
 
+//appendpageLinks ends and is called below
+
 
 
 appendPageLinks(); /** calling function, creates the page links **/
